@@ -48,3 +48,10 @@ Ricordato che un poligono viene detto concavo se il prolungamento di uno dei s
 ![](imgs/img_05.png)
 
 L’algoritmo converge normalmente se il poligono è convesso, nel caso di poligoni concavi dipende dall’orientamento della dividente.	
+
+## Esempi
+
+<video src="./primo_esempio.mp4" width=600  height=400 controls poster="./img_01.jpg">
+  Il video non può essere riprodotto sul tuo browser.<br>
+  Fai partire il download del video cliccando <a href="URL">qui</a>. 
+</video>
