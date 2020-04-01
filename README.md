@@ -51,7 +51,6 @@ L’algoritmo converge normalmente se il poligono è convesso, nel caso di polig
 
 ## Esempi
 
-<video src="./primo_esempio.mp4" width=600  height=400 controls poster="./img_01.jpg">
-  Il video non può essere riprodotto sul tuo browser.<br>
-  Fai partire il download del video cliccando <a href="URL">qui</a>. 
-</video>
+
+
+[![](https://img.youtube.com/vi/kU3XP27mGUE/0.jpg)](https://youtu.be/kU3XP27mGUE "Primo Esempio")
