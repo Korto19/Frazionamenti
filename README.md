@@ -27,6 +27,14 @@ L’inserimento di una superficie target fa ignorare il parametro del punto 3
 7. [**opzionale**] Spuntare se si vogliono n parti della medesima superficie (ovviamente per n maggiore di 2) 
 8. [**opzionale**] Poiché la ricerca della posizione della dividente secondo i parametri impostati dipende da come è posizionato il centroide della geometria poligonale, potrebbe ottenersi, nel caso di divisione per frazione (ad esempio 1/3) o nel caso di superficie assegnata, la parte risultante nella posizione non desiderata, spuntando è possibile invertire la posizione rispetto alla dividente.
 
+Parametri avanzati
+
+![](imgs/img_06.png)
+
+E' possibile variare la precisione del risultato che per default è impostata alla terza cifra decimale.
+
+E' anche possibile variare il numero di iterazioni massime che l'algoritmo di bisezione compie nella ricerca del risultato, variazioni di questo parametro non dovrebbero servire.
+
 ## Modalità operative
 	
 Caricati i layer e tracciata la linea è possibile selezionando una particella ottenerne il frazionamento eseguendo lo script e spuntando, nel caso di un layer con più poligoni, “solo elementi selezionati”.
@@ -47,7 +55,7 @@ Ricordato che un poligono viene detto concavo se il prolungamento di uno dei s
 
 ![](imgs/img_05.png)
 
-L’algoritmo converge normalmente se il poligono è convesso, nel caso di poligoni concavi dipende dall’orientamento della dividente.	
+L’algoritmo converge normalmente se il poligono è convesso, nel caso di poligoni concavi dipende dall’orientamento della dividente.
 
 ## Esempi
 
