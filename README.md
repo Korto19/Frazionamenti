@@ -64,10 +64,15 @@ Frazionamento in parti eguali
 
 [![](https://img.youtube.com/vi/kU3XP27mGUE/0.jpg)](https://youtu.be/kU3XP27mGUE "Primo Esempio")
 
-Frazionamento incrociato
+Frazionamento incrociato in parti eguali
 
 [![](https://i9.ytimg.com/vi/sPACEtsRn6M/mqdefault.jpg?time=1585838329051&sqp=CJTwl_QF&rs=AOn4CLD7wUS2ruOBqnFpx5l-4QwA7lJVMQ)](https://youtu.be/sPACEtsRn6M "Secondo Esempio")
 
-Frazionamento in parti complementari e direttamente da dividente
+Frazionamento in parti complementari o direttamente da dividente
 
 [![](https://i9.ytimg.com/vi/XRjeuAj3QAA/mqdefault.jpg?time=1585838330141&sqp=CJTwl_QF&rs=AOn4CLAMQOMb__XGsfDgN2cOTMsLDdK4SQ)](https://youtu.be/XRjeuAj3QAA "Terzo esempio")
+
+
+Frazionamento a superficie vincolata
+
+[![](https://i9.ytimg.com/vi/RHOEGsowpWU/mq1.jpg?sqp=CISFmPQF&rs=AOn4CLAruYIEvnSXm4IXn8qJOQD3NPaMaw)](https://youtu.be/RHOEGsowpWU "Quarto esempio")
