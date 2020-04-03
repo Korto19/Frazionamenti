@@ -65,9 +65,9 @@ Frazionamento incrociato in parti eguali
 
 Frazionamento in parti complementari o direttamente da dividente
 
-[![](./imgs/esempio2.png)](https://youtu.be/XRjeuAj3QAA "Secondo esempio")
+[![](./imgs/esempio2.PNG)](https://youtu.be/XRjeuAj3QAA "Secondo esempio")
 
 
 Frazionamento a superficie vincolata
 
-[![](./imgs/esempio3.png)](https://youtu.be/RHOEGsowpWU "Terzo esempio")
+[![](./imgs/esempio3.PNG)](https://youtu.be/RHOEGsowpWU "Terzo esempio")
