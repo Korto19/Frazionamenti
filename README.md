@@ -59,15 +59,6 @@ L’algoritmo converge normalmente se il poligono è convesso, nel caso di polig
 
 ## Esempi
 
-<!---
-your comment goes here
-and here
-
-Frazionamento in parti eguali
-
-[![](https://img.youtube.com/vi/kU3XP27mGUE/0.jpg)](https://youtu.be/kU3XP27mGUE "Primo Esempio")
--->
-
 Frazionamento incrociato in parti eguali
 
 [![](./imgs/esempio1.png)](https://youtu.be/sPACEtsRn6M "Primo Esempio")
