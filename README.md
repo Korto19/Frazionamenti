@@ -61,7 +61,7 @@ L’algoritmo converge normalmente se il poligono è convesso, nel caso di polig
 
 Frazionamento incrociato in parti eguali
 
-[![](./imgs/esempio1.png)](https://youtu.be/sPACEtsRn6M "Primo Esempio")
+[![](./imgs/esempio1.PNG)](https://youtu.be/sPACEtsRn6M "Primo Esempio")
 
 Frazionamento in parti complementari o direttamente da dividente
 
