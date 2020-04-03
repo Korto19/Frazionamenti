@@ -46,7 +46,7 @@ import math
 import sys
 
 
-class FrazionamentiBeta_ProcessingAlgorithm(QgsProcessingAlgorithm):
+class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
     """
     Algorithm that fractions a poligon in n parts.
     """
@@ -69,7 +69,7 @@ class FrazionamentiBeta_ProcessingAlgorithm(QgsProcessingAlgorithm):
         return QCoreApplication.translate('Processing', string)
 
     def createInstance(self):
-        return FrazionamentiBeta_ProcessingAlgorithm()
+        return Frazionamenti_ProcessingAlgorithm()
 
     def name(self):
         """
@@ -79,21 +79,21 @@ class FrazionamentiBeta_ProcessingAlgorithm(QgsProcessingAlgorithm):
         lowercase alphanumeric characters only and no spaces or other
         formatting characters.
         """
-        return '0 Frazionamenti BETA'
+        return 'Frazionamenti'
 
     def displayName(self):
         """
         Returns the translated algorithm name, which should be used for any
         user-visible display of the algorithm name.
         """
-        return self.tr('0 Frazionamenti BETA')
+        return self.tr('Frazionamenti')
 
     def group(self):
         """
         Returns the name of the group this algorithm belongs to. This string
         should be localised.
         """
-        return self.tr(self.groupId())
+        return self.tr('FGscripts')
 
     def groupId(self):
         """
@@ -103,7 +103,7 @@ class FrazionamentiBeta_ProcessingAlgorithm(QgsProcessingAlgorithm):
         contain lowercase alphanumeric characters only and no spaces or other
         formatting characters.
         """
-        return ''
+        return 'FGscripts'
 
     def shortHelpString(self):
         """
