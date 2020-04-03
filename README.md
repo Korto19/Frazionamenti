@@ -29,7 +29,7 @@ L’inserimento di una superficie target fa ignorare il parametro del punto 3
 
 Parametri avanzati
 
-![](imgs/img_06.png)
+![](./imgs/img_06.png)
 
 E' possibile variare la precisione del risultato che per default è impostata alla terza cifra decimale.
 
@@ -39,11 +39,11 @@ E' anche possibile variare il numero di iterazioni massime che l'algoritmo di bi
 	
 Caricati i layer e tracciata la linea è possibile selezionando una particella ottenerne il frazionamento eseguendo lo script e spuntando, nel caso di un layer con più poligoni, “solo elementi selezionati”.
 
-![](imgs/img_03.png)
+![](./imgs/img_03.png)
 
 Nel caso di più particelle occorre attivare anche la modalità ricorsiva.
 
-![](imgs/img_04.png)
+![](./imgs/img_04.png)
 
 La linea di divisione può essere tracciata in un punto qualsiasi del layer e può altresì essere di qualsiasi lunghezza, provvederà l’algoritmo a considerarla opportunamente.
 I layer devono essere proiettati e possono anche essere temporanei.
@@ -53,7 +53,7 @@ L’algoritmo accetta layer di tipo qualunque.
 
 Ricordato che un poligono viene detto concavo se il prolungamento di uno dei suoi lati lo divide in due parti, mentre viene detto convesso se questo non accade per nessun lato.
 
-![](imgs/img_05.png)
+![](./imgs/img_05.png)
 
 L’algoritmo converge normalmente se il poligono è convesso, nel caso di poligoni concavi dipende dall’orientamento della dividente.
 
@@ -70,13 +70,13 @@ Frazionamento in parti eguali
 
 Frazionamento incrociato in parti eguali
 
-[![](imgs/esempio1.png)](https://youtu.be/sPACEtsRn6M "Primo Esempio")
+[![](./imgs/esempio1.png)](https://youtu.be/sPACEtsRn6M "Primo Esempio")
 
 Frazionamento in parti complementari o direttamente da dividente
 
-[![](imgs/esempio2.png)](https://youtu.be/XRjeuAj3QAA "Secondo esempio")
+[![](./imgs/esempio2.png)](https://youtu.be/XRjeuAj3QAA "Secondo esempio")
 
 
 Frazionamento a superficie vincolata
 
-[![](imgs/esempio3.png)](https://youtu.be/RHOEGsowpWU "Terzo esempio")
+[![](./imgs/esempio3.png)](https://youtu.be/RHOEGsowpWU "Terzo esempio")
