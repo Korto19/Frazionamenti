@@ -71,3 +71,5 @@ Frazionamento in parti complementari o direttamente da dividente
 Frazionamento a superficie vincolata
 
 [![](./imgs/esempio3.PNG)](https://youtu.be/RHOEGsowpWU "Terzo esempio")
+
+https://github.com/Korto19/Frazionamenti/blob/master/Frazionamenti.py
