@@ -47,7 +47,9 @@ Nel caso di più particelle occorre attivare anche la modalità ricorsiva.
 
 La linea di divisione può essere tracciata in un punto qualsiasi del layer e può altresì essere di qualsiasi lunghezza, provvederà l’algoritmo a considerarla opportunamente.
 I layer devono essere proiettati e possono anche essere temporanei.
-L’algoritmo accetta layer di tipo qualunque.
+L’algoritmo accetta layer di tipo qualunque (shp, gpgk, ecc)
+
+Al termine dell'elaborazione la tabella attributi del layer generato conterrà, oltre i campi del layer origine, tre nuovi campi: __'Fraz_sub'__, __'Fraz_part'__ , __'Fraz_area'__ in cui è memorizzata la sub parte, la % rispetto alla particella/poligono generatrice/generatore e l'area.
 
 ## AVVERTENZA
 
