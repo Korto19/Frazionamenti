@@ -68,4 +68,4 @@ Frazionamento a superficie vincolata
 
 https://github.com/Korto19/Frazionamenti/blob/master/Frazionamenti.py
 
-[agg 12.05.2020]
+- [x][agg 12.05.2020]
