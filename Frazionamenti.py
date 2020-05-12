@@ -3,7 +3,7 @@
 """
 ***************************************************************************
 *                                                                         *
-*   Giulio Fattori 01.04.2020                                             *
+*   Giulio Fattori 01.05.2020                                             *
 *                                                                         *
 *   This program is free software; you can redistribute it and/or modify  *
 *   it under the terms of the GNU General Public License as published by  *
@@ -53,12 +53,10 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
     INPUTP = 'INPUTP'       #layer poligonale con la particella da tagliare
     INPUTL = 'INPUTL'       #layer lineare con una sola linea di taglio
     INPUTA = 'INPUTA'       #numero di parti
-    INPUTD = 'INPUTD'       #numero decimali precisione
     INPUTS = 'INPUTS'       #superficie target
     INPUTV = 'INPUTV'       #verso relativamente alla linea
     INPUTT = 'INPUTT'       #taglio diretto senza calcoli
     INPUTN = 'INPUTN'       #suddivisione nelle n parti per n > 2
-    INPUTI = 'INPUTI'       #numero massimo iterazioni
     
     OUTPUT = 'OUTPUT'
 
@@ -122,9 +120,6 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
         \n- [opz] frazionamento in n parti eguali\
         \n- [opz] superficie da ottenere in alternativa alla parte\
         \n- [opz] inversione delle parti\
-        \n\n **** PARAMETRI AVANZATI **** \
-        \n- precisione alla n esima cifra decimale - default 3\
-        \n- numero massimo iterazioni default 100\n\n\
         \n !!!!------------ AVVERTENZA -------------!!!! \
         \n !!!! POTREBBE NON DARE RISULTATO !!!! \
         \n !!!!------ PER POLIGONI CONCAVI -----!!!!")
@@ -140,8 +135,7 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.INPUTP,
                 self.tr('Input Poly layer'),
-                [QgsProcessing.TypeVectorPolygon],
-                'Poly'
+                [QgsProcessing.TypeVectorPolygon]
             )
         )
 
@@ -150,8 +144,7 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
             QgsProcessingParameterFeatureSource(
                 self.INPUTL,
                 self.tr('Input Line layer'),
-                [QgsProcessing.TypeVectorLine],
-                'Line'
+                [QgsProcessing.TypeVectorLine]
             )
         )
         
@@ -176,7 +169,7 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
         #Numero parti se > 2
         INPUTN = QgsProcessingParameterBoolean(
             self.INPUTN,
-            self.tr('Frazionamento in n > 2 parti eguali'), 0
+            self.tr('Frazionamento in parti eguali'), 0
         )
         #INPUTN.setFlags(INPUTN.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
         self.addParameter(INPUTN)
@@ -187,30 +180,9 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 self.INPUTS,
                 self.tr('Superficie da ottenere in alternativa alla frazione'),
                 QgsProcessingParameterNumber.Double,
-                0, True, 0.0
+                0, False, 0
             )
         )
-        
-        #decimali precisione risultato
-        INPUTD = QgsProcessingParameterNumber(
-            self.INPUTD,
-            self.tr('Precisione sino alla n esima cifra decimale'),
-            QgsProcessingParameterNumber.Integer,
-            3, True, 0
-        )
-        INPUTD.setFlags(INPUTD.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
-        self.addParameter(INPUTD)
-        
-        #decimali precisione risultato
-        INPUTI = QgsProcessingParameterNumber(
-            self.INPUTI,
-            self.tr('massimo numero iterazioni'),
-            QgsProcessingParameterNumber.Integer,
-            100, True, 0
-        )
-        INPUTI.setFlags(INPUTI.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
-        self.addParameter(INPUTI)
-        
         
         #inversione taglio se occorresse
         INPUTV = QgsProcessingParameterBoolean(
@@ -220,7 +192,6 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
         #INPUTV.setFlags(INPUTV.flags() | QgsProcessingParameterDefinition.FlagAdvanced)
         self.addParameter(INPUTV)
         
-        
         # We add a feature sink in which to store our processed features (this usually 
         # takes the form of a newly created vector layer when the algorithm is run in QGIS)
         self.addParameter(
@@ -229,8 +200,6 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 self.tr('Fraz_' + str((datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S"))))
             )
         )
-    
-
 
     def processAlgorithm(self, parameters, context, feedback):
         """
@@ -254,16 +223,6 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
         sup_target = self.parameterAsDouble(
             parameters,
             self.INPUTS,
-            context)
-            
-        decimali = self.parameterAsInt(
-            parameters,
-            self.INPUTD,
-            context)
-            
-        iterazioni = self.parameterAsInt(
-            parameters,
-            self.INPUTI,
             context)
             
         frazioni = self.parameterAsBoolean(
@@ -293,8 +252,6 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
             self.OUTPUT,
             context, fields, QgsWkbTypes.Polygon, sourceP.sourceCrs() #QgsCoordinateReferenceSystem('EPSG:32632') )
         )
-        
-        
         
         def extend_move_line(feat_L, feat_P):
             """input 2 feature output 1 feature"""
@@ -332,10 +289,8 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 else:
                     sys.exit("1 !! LINE TOUCH BUT NOT INTERSECTS POLY !!")
                 
-                #print('feat_L ', feat_L.geometry())
                 feat_r = feat_L.geometry()
                 feat_r.rotate(180,feat_r.centroid().asPoint())
-                #print('feat_r ',feat_r)
                 
                 success, splits, topo = feat_P.geometry().splitGeometry(feat_r.asPolyline(), True)
                 if success == 0:
@@ -360,21 +315,18 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
             
             return rlist
             
-        def bisezione(feat_L, feat_P, parti, decimali, val_prec, iterazioni, verso):
-            area_mappale = feat_P.geometry().area()
-
-            feedback.pushInfo('parti 2')
             
-            area_target = area_mappale / parti
-            #print('area_mappale ', area_mappale,'parti ' , parti,  'area_target ', area_target) 
+        def bisezione(feat_L, feat_P, parti, decimali, val_prec, iterazioni, verso):
+            
+            area_mappale = feat_P.geometry().area()            
+            area_target = area_mappale / 2
             
             rlist = trim_poly_by_line(feat_L, feat_P, verso)
             residuo = round((rlist[1] - area_target), int(decimali))
-            #print('start ', ' - A ', rlist[1], 'a ', rlist[4], 'residuo ', residuo,'\n')
-              
+          
             sign = lambda a: (a>0) - (a<0)
             n = 0
-            k = .1
+            k = 10
             while abs(residuo) >= val_prec and n < iterazioni: 
                 if residuo > 0:
                     #sign = lambda a: (a>0) - (a<0)
@@ -393,30 +345,32 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 feat_t = feat_L.geometry()
                 feat_t.translate(d_x, d_y)
                 feat_L.setGeometry(feat_t)
-                    
+                
                 #taglio e calcolo residuo
                 residuo_p = residuo
                 rlist = trim_poly_by_line(feat_L, feat_P, verso)
                 residuo = round((rlist[1] - area_target), int(decimali))
                 if residuo > residuo_p:
                     k *=10
-                #print('s', n, ' - A ', rlist[1], 'a ', rlist[4],'residuo ', residuo)   
-                #print(' n ', n, d_x, d_y, '\n')
                 n += 1
 
-            if n < 100:
+            
+            if n < iterazioni:
                 feedback.pushInfo(str(n) + ' tagli --- residuo = ' + str(round(residuo,5)) + '\n' )
             else:
-                feedback.pushInfo('******* VARIARE PRECISIONE ******** residuo = ' + str(round(residuo,5)) + '\n' )
-            return rlist
-            
-            
+                feedback.pushInfo('residuo = ' + str(round(residuo,5)) + '\n' )
+            return
+          
+        
+        
         def nnsezione(feat_L, feat_P, parti, decimali, val_prec, iterazioni, verso, sup_target):
             #feedback.pushInfo(str(sup_target))
             area_mappale = feat_P.geometry().area()
             
             if sup_target != 0:
                 if area_mappale > sup_target:
+                    if sup_target > area_mappale / 2:
+                        sup_target = area_mappale - sup_target
                     parti = area_mappale / sup_target
                     area_target = sup_target
                     feedback.pushInfo('parti ' + str(format(1/parti,'.3%')))
@@ -425,11 +379,9 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
             else:
                 area_target = area_mappale / parti 
                 feedback.pushInfo('parti ' + str(format(1/parti,'.3%')))
-            #print('area_mappale ', area_mappale,'parti ' , parti,  'area_target ', area_target) 
             
             rlist = trim_poly_by_line(feat_L, feat_P, verso)
             residuo = round((rlist[1] - area_target), int(decimali))
-            #print('start ', ' - A ', rlist[1], 'a ', rlist[4], 'residuo ', residuo,'\n')
             
             #centroide iniziale linea
             xl0 = feat_L.geometry().centroid().asPoint().x()
@@ -463,7 +415,6 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 yc0 = rlist[5].y()
                 #calcolo residuo
                 residuo = round((rlist[4] - area_target), int(decimali))
-                #print('s > 0', n, ' - ', rlist[1], rlist[4], residuo,'\n')
                 #memorizzo posizione finale centroide linea
                 xlf = feat_L.geometry().centroid().asPoint().x()
                 ylf = feat_L.geometry().centroid().asPoint().y()
@@ -497,24 +448,21 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 #taglio e calcolo residuo
                 rlist = trim_poly_by_line(feat_L, feat_P, verso)
                 residuo = round((rlist[4] - area_target), int(decimali)) 
-                #print('s', n, ' - A ', rlist[1], 'a ', rlist[4],'residuo ', residuo)   
-
                 n += 1
                 
-            if n < 100:
+            if n < iterazioni:
                 feedback.pushInfo(str(n) + ' tagli --- residuo = ' + str(round(residuo,5)) + '\n' )
             else:
-                feedback.pushInfo('******* VARIARE PRECISIONE ******** residuo = ' + str(round(residuo,5)) + '\n' )
+                feedback.pushInfo('residuo = ' + str(round(residuo,5)) + '\n' )
             return rlist
         
                 
         #------------------ PARAMETRI ELABORAZIONE ------------------ 
-        str_decimali = '.' + str(decimali) + 'f'
-        decimali = decimali + 1
-        val_prec = 1 / (10 ** decimali)
-        #rlist = []
+        str_decimali = '.4f'
+        decimali = 5
+        val_prec = 0.000001
+        iterazioni = 200
         #------------------ PARAMETRI ELABORAZIONE ------------------ 
-        #feedback.pushInfo(str(sup_target))
         
         for f in sourceP.getFeatures():
             mappale = f
@@ -523,36 +471,32 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
         for f in sourceL.getFeatures():
             dividente = f
          
-        if not frazioni:
-            if not direct and parti == 2 and sup_target == 0:
+        if not frazioni or ( frazioni and parti==2):
+            if direct:
+                feedback.pushInfo('Trim Direct')
+                rlist = trim_poly_by_line(dividente, mappale, verso) 
+            elif parti == 2 and sup_target == 0:
+                feedback.pushInfo('Trim Fifty Fifty')
                 dividente = extend_move_line(dividente, mappale)
-                rlist = bisezione(dividente, mappale, parti, decimali, val_prec, iterazioni, verso)
-            elif not direct and (parti > 2 or sup_target != 0):
+                bisezione(dividente, mappale, parti, decimali, val_prec, iterazioni, verso)
+                rlist = trim_poly_by_line(dividente, mappale, verso)
+            elif sup_target != 0:
+                feedback.pushInfo('Trim Target area')
                 dividente = extend_move_line(dividente, mappale)
                 rlist = nnsezione(dividente, mappale, parti, decimali, val_prec, iterazioni, verso, sup_target)
+                rlist = trim_poly_by_line(dividente, mappale, verso)
             else:
-                feedback.pushInfo('Direct Trim')
+                feedback.pushInfo('Trim Target 1/'+ str(int(parti)) + ' and ' + str(int(parti-1)) + '/' + str(int(parti)))
+                dividente = extend_move_line(dividente, mappale)
+                rlist = nnsezione(dividente, mappale, parti, decimali, val_prec, iterazioni, verso, sup_target)
                 rlist = trim_poly_by_line(dividente, mappale, verso)
                 
-            p = 1
-            for i in range(0,4,3):
-                for f in sourceP.getFeatures():
-                    new_feature = QgsFeature()
-                    new_feature.setGeometry(rlist[i].geometry())
-                    new_f = f.attributes()
-                    new_f.append('sub '+ str(int(i/3+1)))
-                    new_f.append(format(rlist[i+1]/area_mappale,'.2%'))
-                    new_f.append(format(rlist[i+1],str_decimali))
-                    new_feature.setAttributes(new_f)
-                    sink.addFeature(new_feature, QgsFeatureSink.FastInsert)
-                    p = parti - 1
-                    
         else:
+            feedback.pushInfo('Target n 1/n Trim')
             while parti > 2:
                 feedback.pushInfo(str(parti))
                 dividente = extend_move_line(dividente, mappale)
                 rlist = nnsezione(dividente, mappale, parti, decimali, val_prec, iterazioni, verso, sup_target)
-                #rlist = trim_poly_by_line(dividente, mappale, verso)
                 for f in sourceP.getFeatures():
                     new_feature = QgsFeature()
                     new_feature.setGeometry(rlist[3].geometry())
@@ -565,20 +509,22 @@ class Frazionamenti_ProcessingAlgorithm(QgsProcessingAlgorithm):
                 mappale = rlist[0]
                 parti -= 1
             
-            feedback.pushInfo('QUI x 2')
+            feedback.pushInfo('2.0')
+            
             dividente = extend_move_line(dividente, mappale)
             rlist = bisezione(dividente, mappale, parti, decimali, val_prec, iterazioni, verso)
-            #rlist = trim_poly_by_line(dividente, mappale, verso)
-            for i in range(0,4,3):
-                for f in sourceP.getFeatures():
-                    new_feature = QgsFeature()
-                    new_feature.setGeometry(rlist[i].geometry())
-                    new_f = f.attributes()
-                    new_f.append('sub '+ str(int(i/3+1)))
-                    new_f.append(format(rlist[i+1]/area_mappale,'.2%'))
-                    new_f.append(format(rlist[i+1],str_decimali))
-                    new_feature.setAttributes(new_f)
-                    sink.addFeature(new_feature, QgsFeatureSink.FastInsert)
-                    p = parti - 1
+            rlist = trim_poly_by_line(dividente, mappale, verso)
+            
+        for i in range(0,4,3):
+            for f in sourceP.getFeatures():
+                new_feature = QgsFeature()
+                new_feature.setGeometry(rlist[i].geometry())
+                new_f = f.attributes()
+                new_f.append('sub '+ str(int(i/3+1)))
+                new_f.append(format(rlist[i+1]/area_mappale,'.2%'))
+                new_f.append(format(rlist[i+1],str_decimali))
+                new_feature.setAttributes(new_f)
+                sink.addFeature(new_feature, QgsFeatureSink.FastInsert)
+                p = parti - 1
                 
         return {self.OUTPUT: dest_id}
