@@ -14,7 +14,7 @@ about=Divide un poligono secondo una linea
       Divide a polybon by a line
 
 tracker=https://github.com/Korto19/Frazionamenti/issues
-repository=https://github.com/Korto19/Frazionamenti/plugin
+repository=https://github.com/Korto19/Frazionamenti/tree/master/plugin
 # End of mandatory metadata
 
 # Recommended items:
