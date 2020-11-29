@@ -11,10 +11,6 @@ Dopo aver scaricato lo script da **Strumenti di Processing** eseguire **Aggiungi
 
 ![](./imgs/img_01.png)
 
-### Caricamento Plugin
-Per installarlo basta che scarichiate lo zip del repo **plugin frazionamenti** e da QGIS fate installa plugin da zip o direttamente dai plugin di QGIS e vi comparirà negli script di processing nella cartella FRAZ.
-
-![](./imgs/processing.png)
 
 ### Finestra dell’algoritmo
 
