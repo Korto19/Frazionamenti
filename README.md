@@ -5,17 +5,22 @@ Il frazionamento (catastale) è una procedura con la quale si mira a dividere 
 Esiste una casistica e relative modalità per frazionare una particella con procedimenti geometrici e matematici.
 In questa applicazione il frazionamento viene eseguito con algoritmi di bisezione applicati alla superficie che si intende dividere.
 
-## Caricamento algoritmo di processing
+### Caricamento algoritmo di processing
 	
-Da **Strumenti di Processing** eseguire **Aggiungi Script agli Strumenti**
+Dopo aver scaricato lo script da **Strumenti di Processing** eseguire **Aggiungi Script agli Strumenti** .
 
 ![](./imgs/img_01.png)
 
-## Finestra dell’algoritmo
+### Caricamento Plugin
+Per installarlo basta che scarichiate lo zip del repo **plugin frazionamenti** e da QGIS fate installa plugin da zip o direttamente dai plugin di QGIS e vi comparirà negli script di processing nella cartella FRAZ.
+
+![](./imgs/processing.png)
+
+### Finestra dell’algoritmo
 
 Descrizione parametri:
-
 ![](./imgs/img_02.png)
+
 
 1. [**richiesto**] layer poligonale su cui scegliere la/e particelle da frazionare
 2. [**richiesto**]  layer linea su cui disegnare la linea di taglio desiderata
@@ -27,7 +32,7 @@ L’inserimento di una superficie target fa ignorare il parametro del punto 3
 7. [**opzionale**] Spuntare se si vogliono n parti della medesima superficie (ovviamente per n maggiore di 2) 
 8. [**opzionale**] Poiché la ricerca della posizione della dividente secondo i parametri impostati dipende da come è posizionato il centroide della geometria poligonale, potrebbe ottenersi, nel caso di divisione per frazione (ad esempio 1/3) o nel caso di superficie assegnata, la parte risultante nella posizione non desiderata, spuntando è possibile invertire la posizione rispetto alla dividente.
 
-## Modalità operative
+### Modalità operative
 	
 Caricati i layer e tracciata la linea è possibile selezionando una particella ottenerne il frazionamento eseguendo lo script e spuntando, nel caso di un layer con più poligoni, “solo elementi selezionati”.
 
@@ -43,7 +48,7 @@ L’algoritmo accetta layer di tipo qualunque (shp, gpgk, ecc)
 
 Al termine dell'elaborazione la tabella attributi del layer generato conterrà, oltre i campi del layer origine, tre nuovi campi: __'Fraz_sub'__, __'Fraz_part'__ , __'Fraz_area'__ in cui è memorizzata la sub parte, la % rispetto alla particella/poligono generatrice/generatore e l'area.
 
-## AVVERTENZA
+### AVVERTENZE
 
 Ricordato che un poligono viene detto concavo se il prolungamento di uno dei suoi lati lo divide in due parti, mentre viene detto convesso se questo non accade per nessun lato.
 
@@ -51,7 +56,7 @@ Ricordato che un poligono viene detto concavo se il prolungamento di uno dei s
 
 L’algoritmo converge normalmente se il poligono è convesso, nel caso di poligoni concavi dipende dall’orientamento della dividente.
 
-## Esempi
+### Esempi
 
 Frazionamento incrociato in parti eguali
 
